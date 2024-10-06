@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生活记录 - 金豆阶段</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .record {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .record img {
+            max-width: 100px;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .record button {
+            margin-left: auto;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .form {
+            margin-bottom: 20px;
+        }
+        .form input, .form textarea {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>金豆记录</h1>
+        <div class="form">
+            <input type="text" id="date" placeholder="日期 (例如：2023-10-01)">
+            <input type="text" id="description" placeholder="简介">
+            <input type="file" id="imageInput" accept="image/*">
+            <button id="addRecord">添加记录</button>
+        </div>
+        <div id="records"></div>
+    </div>
+
+    <script>
+        document.getElementById('addRecord').onclick = function() {
+            const date = document.getElementById('date').value;
+            const description = document.getElementById('description').value;
+            const imageInput = document.getElementById('imageInput');
+            const file = imageInput.files[0];
+
+            if (!date || !description || !file) {
+                alert('请填写所有字段！');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const recordsDiv = document.getElementById('records');
+                const recordDiv = document.createElement('div');
+                recordDiv.className = 'record';
+                recordDiv.innerHTML = `
+                    <img src="${e.target.result}" alt="金豆图">
+                    <div>
+                        <strong>${date}</strong>
+                        <p>${description}</p>
+                    </div>
+                `;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '删除';
+                deleteButton.onclick = function() {
+                    recordsDiv.removeChild(recordDiv);
+                };
+                recordDiv.appendChild(deleteButton);
+                recordsDiv.appendChild(recordDiv);
+
+                // Clear inputs
+                document.getElementById('date').value = '';
+                document.getElementById('description').value = '';
+                imageInput.value = '';
+            };
+            reader.readAsDataURL(file);
+        };
+    </script>
+</body>
+</html>

@@ -22,12 +22,24 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/csharproject/csharpweb/ResumeWeb/src/sampleapp/Views/Function/Nowadays.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRnVuY3Rpb25cTm93YWRheXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/csharproject/csharpweb/ResumeWeb/src/sampleapp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/csharproject/csharpweb/ResumeWeb/src/sampleapp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/csharproject/csharpweb/ResumeWeb/src/sampleapp/Views/Record/Experience.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb3JkXEV4cGVyaWVuY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/csharproject/csharpweb/ResumeWeb/src/sampleapp/Views/Resume/Personal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdW1lXFBlcnNvbmFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/csharproject/csharpweb/ResumeWeb/src/sampleapp/Views/Shared/Error.cshtml]
