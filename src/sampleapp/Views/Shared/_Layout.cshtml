@@ -14,21 +14,17 @@
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">sampleapp</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">导航页</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Resume" asp-action="Personal">个人简历</a>
                             </li>
-
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Record" asp-action="Experience">生活经历</a>
@@ -38,15 +34,8 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Function" asp-action="Nowadays">信息数据</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                            </li>
-                                <li class="quit-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Logout</a>
+                            <li class="nav-item ms-auto">
+                                <a class="nav-link text-dark" href="#" onclick="logout()">登出</a>
                             </li>
                         </ul>
                     </div>
@@ -69,5 +58,35 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function logout() {
+            $.ajax({
+                url: '@Url.Action("Logout", "Account")',
+                type: 'POST',
+                success: function(result, textStatus, jqXHR) {
+                    // 检查响应状态码
+                    console.log('Response status:', jqXHR.status);
+                    if (jqXHR.status == 302 ) {
+                        // 获取重定向 URL
+                        var redirectUrl = jqXHR.getResponseHeader('Location');
+                        console.log('Redirecting to:', redirectUrl);
+                        // 重定向到登录页面
+                        window.location.href = redirectUrl;
+                    } else if (jqXHR.status == 200) {
+                        window.location.href = '/Account/Login';
+                        console.log('Logout successful');
+                        // 如果不需要重定向，可以在这里处理其他逻辑
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Logout failed:', errorThrown);
+                    console.error('Status:', jqXHR.status);
+                    console.error('Response:', jqXHR.responseText);
+                    // 可以在这里添加一些用户友好的错误提示
+                    alert('Logout failed. Please try again.');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

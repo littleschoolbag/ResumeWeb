@@ -1,0 +1,7 @@
+D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\publish\sampleapp.exe
+D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\publish\appsettings.Development.json
+D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\publish\appsettings.json
+D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\publish\sampleapp.dll
+D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\publish\sampleapp.deps.json
+D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\publish\sampleapp.runtimeconfig.json
+D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\publish\sampleapp.pdb

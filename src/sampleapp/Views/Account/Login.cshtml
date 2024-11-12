@@ -1,3 +1,4 @@
+@model sampleapp.Models.LoginViewModel;
 @{
     ViewData["Title"] = "登录";
     ViewData["HideNavBar"] = "true";
@@ -27,6 +28,9 @@
             border-radius: 5px;
             background-color: #fff;
         }
+        .custom-validation-summary{
+            margin-top: 10px;
+        }
     </style>
     </h1>
     <div class = "login-parentcontainer"
@@ -35,16 +39,19 @@
             <form method="post" asp-action="Login" asp-controller="Account">
                 <div class="form-group">
                     <label for="username">账号</label>
-                    <input type="text" class="form-control" id="username" name="username" required />
+                    <input type="text" class="form-control" asp-for="Username" required />
                 </div>
                 <div class="form-group">
                     <label for="password">密码</label>
-                    <input type="password" class="form-control" id="password" name="password" required />
+                    <input type="password" class="form-control" asp-for="Password" required />
                 </div>
                 <div class="form-group">
                     <p>联系方式：<a href= "mailto:1301621323@qq.com">1301621323@qq.com</a></p>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">登录</button>
+                <div class="form-group d-flex align-items-centr">
+                    <button type="submit" class="btn btn-primary btn-block">登录</button>
+                    <div asp-validation-summary="All" class="text-danger custom-validation-summary"></div>
+                </div>
             </form>
         </div>
     </div>

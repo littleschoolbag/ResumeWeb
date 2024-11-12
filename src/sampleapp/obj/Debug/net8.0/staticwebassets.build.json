@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kQa2A2tkNL9fm05AvF+P4eD92M0E+7d9A+VZ3VS6f5U=",
+  "Hash": "xoZWG/sENUHnDgtAIWI1uYT3DljEAvsxqnNvQW5evGw=",
   "Source": "sampleapp",
   "BasePath": "_content/sampleapp",
   "Mode": "Default",
@@ -55,6 +55,25 @@
       "OriginalItemSpec": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\sampleapp.bundle.scp.css"
     },
     {
+      "Identity": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\css\\Experience.css",
+      "SourceId": "sampleapp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\",
+      "BasePath": "_content/sampleapp",
+      "RelativePath": "css/Experience.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Experience.css"
+    },
+    {
       "Identity": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\css\\site.css",
       "SourceId": "sampleapp",
       "SourceType": "Discovered",
@@ -91,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\js\\Experience.js",
+      "SourceId": "sampleapp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\",
+      "BasePath": "_content/sampleapp",
+      "RelativePath": "js/Experience.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Experience.js"
     },
     {
       "Identity": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\js\\site.js",

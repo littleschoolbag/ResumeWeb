@@ -1,25 +1,20 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Page</title>
+﻿
     <style>
         .wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Full viewport height */
+            height: 70vh; /* Full viewport height */
         }
         .front_parent_container {
             display: flex;
-            gap: 20px;
+            gap: 80px; /*间隔调整*/
         }
         .board {
             background-color: #fff;
             border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 80px;
+            padding: 80px;
             text-align: center;
             width: 200px;
             cursor: pointer;
@@ -34,22 +29,23 @@
             font-size: 1.5em;
         }
     </style>
-</head>
 <div class="wrapper">
     <div class="front_parent_container">
-        <div class="board" onclick="location.href='page1.html'">
-            <h2>Board 1</h2>
-            <p>Click to view more details about Board 1.</p>
+        <div class="board" onclick="location.href='/Resume/Personal'">
+            <h2>个人简历</h2>
         </div>
-        <div class="board" onclick="location.href='page2.html'">
-            <h2>Board 2</h2>
-            <p>Click to view more details about Board 2.</p>
+        <div class="board" onclick="location.href='/Record/Experience'">
+            <h2>生活经历</h2>
         </div>
-        <div class="board" onclick="location.href='page3.html'">
-            <h2>Board 3</h2>
-            <p>Click to view more details about Board 3.</p>
+        <div class="board" onclick="location.href='/Function/Nowadays'">
+            <h2>信息数据</h2>
         </div>
     </div>
 </div>
 
-</html>
+<script>
+    function()
+    {
+        
+    }
+</script>

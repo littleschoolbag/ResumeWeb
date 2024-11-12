@@ -5,12 +5,20 @@
       "PackagePath": "staticwebassets\\sampleapp.bundle.scp.css"
     },
     {
+      "Id": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\css\\Experience.css",
+      "PackagePath": "staticwebassets\\css\\Experience.css"
+    },
+    {
       "Id": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\js\\Experience.js",
+      "PackagePath": "staticwebassets\\js\\Experience.js"
     },
     {
       "Id": "D:\\csharproject\\csharpweb\\ResumeWeb\\src\\sampleapp\\wwwroot\\js\\site.js",
