@@ -89,7 +89,6 @@ D:\csharpp_project\simpleproject\ResumeWeb\src\sampleapp\obj\Debug\net8.0\refint
 D:\csharpp_project\simpleproject\ResumeWeb\src\sampleapp\obj\Debug\net8.0\sampleapp.pdb
 D:\csharpp_project\simpleproject\ResumeWeb\src\sampleapp\obj\Debug\net8.0\sampleapp.genruntimeconfig.cache
 D:\csharpp_project\simpleproject\ResumeWeb\src\sampleapp\obj\Debug\net8.0\ref\sampleapp.dll
->>>>>>> 4a6c9ac8b8b0ea1ce831ad3c0afed9ea47b0debc
 D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\bin\Debug\net8.0\publish\web.config
 D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\bin\Debug\net8.0\appsettings.Development.json
 D:\csharproject\csharpweb\ResumeWeb\src\sampleapp\bin\Debug\net8.0\appsettings.json
