@@ -158,31 +158,55 @@
 
             const tabName = activeTab.textContent;
             const contentBlock = {
-                time: new Date(dateValue),
+                id : null,
+                tabName : tabName,
+                dateValue: new Date(dateValue),
                 imageUrl: imageUrl,
                 description: description
             };
 
-    
-            // 添加到该标签的内容列表
-            tabContents[tabName].push(contentBlock);
+            $.ajax({
+                url: '/Record/InsertTabData',
+                type: 'POST',
+                data: JSON.stringify(contentBlock),
+                contentType: 'application/json',
+                success: function(response) {
+                    if(response.success == true)
+                    {
+                        // 添加到该标签的内容列表
+                        contentBlock.id = response.id;
+                        tabContents[tabName].push(contentBlock);
             
-            // 更新内容区域
-            updateContentArea(tabName);
+                        // 更新内容区域
+                        updateContentArea(tabName);
+            
+                        // 隐藏模态窗口
+                        document.getElementById('modal').style.display = 'none';
+            
+                        // 清空输入
+                        document.getElementById('date').value = '';
+                        document.getElementById('image').value = '';
+                        document.getElementById('imagePreview').style.display = 'none';
+                        document.getElementById('description').value = '';
+            
+                        // 显示成功消息
+                        messageElement.textContent = '内容块添加成功！';
+                        messageElement.style.color = 'green';
+                        messageElement.style.display = 'block';
+                    }
+                    else if(response.success == false)
+                    {
+                        alert("数据库添加失败");
+                    }
+                }
+                ,error: function(error) {
+                    console.error('Error:', error);
+                    alert("数据库添加失败,请检查网络");
+                    // 处理错误响应
+                }
+            })
+            // 添加到该标签的内容列表
 
-            // 隐藏模态窗口
-            document.getElementById('modal').style.display = 'none';
-
-            // 清空输入
-            document.getElementById('date').value = '';
-            document.getElementById('image').value = '';
-            document.getElementById('imagePreview').style.display = 'none';
-            document.getElementById('description').value = '';
-
-            // 显示成功消息
-            messageElement.textContent = '内容块添加成功！';
-            messageElement.style.color = 'green';
-            messageElement.style.display = 'block';
         });
 
         document.getElementById('cancel').addEventListener('click', function() {
@@ -195,27 +219,59 @@
             document.getElementById('description').value = '';
         });
 
-        document.getElementById('deleteSelected').addEventListener('click', function() {
+        document.getElementById('content-delete-button').addEventListener('click', function(event) {
             if (activeTab) {
                 const tabName = activeTab.textContent;
-                const selectedBlocks = document.querySelectorAll('.content-block.selected');
-
-                if (selectedBlocks.length > 0) {
+                const selectedBlocks = event.target.closest('.content-block');
+                const childIdelements = selectedBlocks.querySelector('id');
+                if (selectedBlocks) {
                     // 确认删除
                     const confirmDelete = confirm('您确定要删除选中的内容块吗？');
                     if (confirmDelete) {
-                        selectedBlocks.forEach(block => {
-                            const index = Array.from(block.parentNode.children).indexOf(block);
-                            tabContents[tabName].splice(index, 1); // 从数据中删除
-                            block.remove(); // 从DOM中删除
-                        });
+                            $.ajax({
+                                url: '/Record/DeleteTabData',
+                                type: 'DELETE',
+                                data: JSON.stringify({
+                                    tabName: tabName,
+                                    id : childIdelements.innerText,
+                                }),
+                                contentType: 'application/json',
+                                success: function(response) {
+                                    if(response.success == true)
+                                    {
+                                       var index =  tabContents[tabName].findIndex(block => block.id === childIdelements.innerText);
+                                       if (index !== -1) 
+                                        {
+                                           tabContents[tabName].splice(index, 1);
+                                           selectedBlocks.innerHTML = '';
+                                        }
+                                       else
+                                       {
+                                            alert('数组中未找到该ID,但是数据库删掉了');
+                                       }
+                                    }
+                                    else if(response.success == false)
+                                    {
+                                        alert("数据库删除失败");
+                                    }
+                                }
+                                ,error: function(error) {
+                                    console.error('Error:', error);
+                                    alert("数据库删除失败,请检查网络");
+                                    // 处理错误响应
+                                }
+                            });
                     }
-                } else {
-                    alert('请选中要删除的内容块。');
                 }
-            } else {
+                else 
+                {
+                    alert('没有找到要删除的内容块。');
+                }
+            } 
+            else {
                 alert('没有选择任何标签页。');
             }
+            updateContentArea(activeTab.textContent);
         });
 
         function activateTab(tab) {
@@ -235,7 +291,6 @@
         function updateContentArea(tabName) {
             const contentArea = document.getElementById('content');
             contentArea.innerHTML = ''; // 清空现有内容
-
             // 获取该标签的内容并显示
             const contents = tabContents[tabName];
             if (Array.isArray(contents) && contents.length > 0) {
@@ -243,10 +298,11 @@
                     const block = document.createElement('div');
                     block.className = 'content-block';
                     block.innerHTML = `
-                        <div class="time">${content.time.toLocaleDateString("zh-CN")}</div>
+                        <div class="id hidden">${content.id}></div>
+                        <div class="time">${content.dateValue.toLocaleDateString("zh-CN")}</div>
                         <img class="preview" src="${content.imageUrl}" alt="Image Preview"> </img>
                         <div class="description">${content.description}</div>
-                        <button class="delete-button" data-index="${index}">删除</button>
+                        <button class="content-delete-button" data-index="${index}">删除</button>
                     `;
                     contentArea.appendChild(block);})
                     
@@ -267,4 +323,7 @@
             return false; // 没有重名的标签
         }
 
+        function pageInit() {
+            
+        }
 

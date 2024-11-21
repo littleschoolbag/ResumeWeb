@@ -40,9 +40,25 @@ public class RecordController : Controller
             return Json(new { success = false , message = "未知失败" });
         }
     }
+    [HttpPost]
+    public IActionResult InsertTabData([FromBody] ExperienceViewModel model)
+    {
+        try{
+            (bool result, int id) = _userRepository.InsertTabData(model.tabName, model.dateValue, model.imageUrl, model.description);
+            if(result == true){
+                return Json(new { success = true , message = "插入成功", id = id });
+            }
+            return Json(new { success = false , message = "插入失败" });
+        }
+        catch{
+            return Json(new { success = false , message = "未知失败" });
+        }
+    }
+
+
     
     [HttpDelete]
-    public IActionResult DeleteTabData(string tablename)
+    public IActionResult DeleteTabTable(string tablename)
     {
         try{
             bool isDeleteTab = _userRepository.DeleteTabTable(tablename);
@@ -55,4 +71,26 @@ public class RecordController : Controller
             return Json(new { success = false , message = "未知失败" });
         }
     }
+    
+    [HttpDelete]
+    public IActionResult DeleteTabData([FromBody] ExperienceViewModel model)
+    {
+        try{
+            bool isDeleteData = _userRepository.DeleteTabData(model.tabName, model.id);
+            if(isDeleteData == true){
+                return Json(new { success = true , message = "删除成功" });
+            }
+            return Json(new { success = false , message = "删除失败" });
+        }
+        catch{
+            return Json(new { success = false , message = "未知失败" });
+        }
+    }
+    
+    [HttpGet]
+    public IActionResult GetTabList()
+    {
+        return Json(_userRepository.getTabList());
+    }
+
 }

@@ -3,11 +3,83 @@ namespace sampleapp.Models;
 public class UserRepository
 {
     private readonly string _connectionString;
+    private readonly int addTablist = 0;
+    private readonly int deleteTablist = 0;
+    
+    public  List<string> tabList = new List<string>{};
     public UserRepository(string connectionString)
     {
         _connectionString = connectionString;
     }
-
+    
+    private bool UpdateTableList(string tabname, int updateaction)
+    {
+        using(var connection = new MySqlConnection(_connectionString))
+        {
+            var query = new MySqlCommand("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = tablist");
+            int count = Convert.ToInt16(query.ExecuteScalar());
+            if(count > 0)
+            {
+                if(updateaction==addTablist)
+                {
+                    var command = new MySqlCommand("INSERT INTO tablist (tabname) VALUES (@tabname)", connection);
+                    command.Parameters.AddWithValue("@tabname", tabname);
+                    int result = command.ExecuteNonQuery();
+                    if(result == -1)
+                    {
+                        return false;
+                    }
+                    tabList.Add(tabname);
+                    return true;
+                }
+                else if(updateaction == deleteTablist)
+                {
+                    var command= new MySqlCommand("DELETE FROM tablist WHERE tabname = @tabname", connection);
+                    int result  = command.ExecuteNonQuery();
+                    if(result == -1)
+                    {
+                        return false;
+                    }
+                    tabList.Remove(tabname);
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                var createCommand = new MySqlCommand("CREATE TABLE tablist (tabname VARCHAR(255))", connection);
+                int createResult = createCommand.ExecuteNonQuery();
+                if(createResult == -1)
+                {
+                    return false;
+                }
+                if(updateaction==addTablist)
+                {
+                    var command = new MySqlCommand("INSERT INTO tablist (tabname) VALUES (@tabname)", connection);
+                    command.Parameters.AddWithValue("@tabname", tabname);
+                    int result = command.ExecuteNonQuery();
+                    if(result == -1)
+                    {
+                        return false;
+                    }
+                    tabList.Add(tabname);
+                    return true;
+                }
+                else if(updateaction==deleteTablist)
+                {
+                    var command= new MySqlCommand("DELETE FROM tablist WHERE tabname = @tabname", connection);
+                    int result  = command.ExecuteNonQuery();
+                    if(result == -1)
+                    {
+                        return false;
+                    }
+                    tabList.Remove(tabname);
+                    return true;
+                }
+                return false;
+            }
+        }
+    }
     public bool ValidateUser(string username, string password)
     {
         using (var connection = new MySqlConnection(_connectionString))
@@ -41,6 +113,7 @@ public class UserRepository
 
                 // 执行命令
                 command.ExecuteNonQuery();
+                UpdateTableList(tablename, addTablist);
                 return true; // 如果没有异常，返回 true
             }
             catch (MySqlException ex)
@@ -64,6 +137,7 @@ public class UserRepository
 
                 // 执行命令
                 command.ExecuteNonQuery();
+                UpdateTableList(tablename, deleteTablist);
                 return true; // 如果没有异常，返回 true
             }
             catch (MySqlException ex)
@@ -75,7 +149,7 @@ public class UserRepository
         }
     }
     
-    public (bool result, int id) InsertTabData(string tablename, TabData data)
+    public (bool result, int id) InsertTabData(string tablename, DateTime date, string imageUrl, string description)
     {
         using (var connection = new MySqlConnection(_connectionString))
         {
@@ -86,9 +160,9 @@ public class UserRepository
                 var command = new MySqlCommand($"INSERT INTO {tablename} (event_time, event_imgurl, event_description) VALUES (@event_time, @event_imgurl, @event_description);SELECT LAST_INSERT_ID();", connection);
 
                 // 绑定参数
-                command.Parameters.AddWithValue("@event_time", data.event_time);
-                command.Parameters.AddWithValue("@event_imgurl", data.event_imgurl);
-                command.Parameters.AddWithValue("@event_description",data.event_description);
+                command.Parameters.AddWithValue("@event_time", date);
+                command.Parameters.AddWithValue("@event_imgurl", imageUrl);
+                command.Parameters.AddWithValue("@event_description",description);
                 int insertId = Convert.ToInt32(command.ExecuteScalar());
 
                 return (true, insertId);
@@ -102,7 +176,7 @@ public class UserRepository
         }
     }
     
-    public bool DeleteTabData(int id)
+    public bool DeleteTabData(string tablename,int id)
     {
         
         using (var connection = new MySqlConnection(_connectionString))
@@ -111,7 +185,7 @@ public class UserRepository
             try
             {
                 // 创建命令
-                var command = new MySqlCommand($"DELETE FROM tab_data WHERE id = @id", connection);
+                var command = new MySqlCommand($"DELETE FROM {tablename} WHERE id = @id", connection);
 
                 // 绑定参数
                 command.Parameters.AddWithValue("@id", id);
@@ -151,7 +225,25 @@ public class UserRepository
             }
         }
     }
+    
+    public List<string>  getTabList()
+    {
+        using(var connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+            var command = new MySqlCommand("SELECT * FROM tablist", connection);
+            using(var reader = command.ExecuteReader())
+            {
+                while(reader.Read())
+                {
+                    tabList.Add(reader.GetString(0));
+                }
+                return tabList;
+            }
+        }
+    }
 }
+
 
 
 public class TabData
