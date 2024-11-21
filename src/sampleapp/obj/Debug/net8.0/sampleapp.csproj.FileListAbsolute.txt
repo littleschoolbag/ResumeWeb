@@ -58,8 +58,6 @@ D:\csharpp_project\simpleproject\sampleapp\obj\Debug\net8.0\refint\sampleapp.dll
 D:\csharpp_project\simpleproject\sampleapp\obj\Debug\net8.0\sampleapp.pdb
 D:\csharpp_project\simpleproject\sampleapp\obj\Debug\net8.0\sampleapp.genruntimeconfig.cache
 D:\csharpp_project\simpleproject\sampleapp\obj\Debug\net8.0\ref\sampleapp.dll
-<<<<<<< HEAD
-=======
 D:\csharpp_project\simpleproject\ResumeWeb\src\sampleapp\bin\Debug\net8.0\appsettings.Development.json
 D:\csharpp_project\simpleproject\ResumeWeb\src\sampleapp\bin\Debug\net8.0\appsettings.json
 D:\csharpp_project\simpleproject\ResumeWeb\src\sampleapp\bin\Debug\net8.0\sampleapp.staticwebassets.runtime.json
